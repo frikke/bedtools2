@@ -26,11 +26,11 @@ NewChromSweep::NewChromSweep(ContextIntersect *context)
      _wasInitialized(false),
      _currQueryRec(NULL),
      _runToQueryEnd(_context->getRunToQueryEnd()),
+     _runToDbEnd(false),
      _lexicoDisproven(false),
      _lexicoAssumed(false),
      _lexicoAssumedFileIdx(-1),
-     _testLastQueryRec(false),
-     _runToDbEnd(false)
+     _testLastQueryRec(false)
 {
 	_filePrevChrom.resize(_numFiles);
 	_runToDbEnd = context->shouldRunToDbEnd();
@@ -368,7 +368,7 @@ void NewChromSweep::testChromOrder(const Record *rec)
 
 
     if (verifyChromOrderMismatch(chrom, prevChrom, fileIdx)) {
-        fprintf(stderr, "ERROR: chromomsome sort ordering for file %s is inconsistent with other files. Record was:\n", _context->getInputFileName(fileIdx).c_str());
+        fprintf(stderr, "ERROR: chromosome sort ordering for file %s is inconsistent with other files. Record was:\n", _context->getInputFileName(fileIdx).c_str());
         rec->print(stderr, true);
         exit(1);
     }
